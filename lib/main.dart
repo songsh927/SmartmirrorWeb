@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:timer_builder/timer_builder.dart';
+import 'package:date_format/date_format.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,13 +35,21 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(40),
         width: double.infinity,
         height: double.infinity,
         color: Colors.black,
-        child: Text(
-          ' 10 : 23 ',
-          style: TextStyle(color: Colors.white, fontSize: 40),
+        child: TimerBuilder.periodic(
+          const Duration(seconds: 1),
+          builder: (context) {
+            return Text(
+              formatDate(DateTime.now(), [hh, ' : ', nn, ' : ', ss, ' ', am]),
+              style: const TextStyle(
+                  fontSize: 50,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white),
+            );
+          },
         ),
       ),
     );
