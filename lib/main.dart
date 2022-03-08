@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:timer_builder/timer_builder.dart';
-import 'package:date_format/date_format.dart';
-import 'package:intl/intl.dart';
+import 'package:smartmirror_webview/mirror.dart';
+
+import 'calendar.dart';
+import 'controller.dart';
+import 'schedule.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,61 +39,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: [
-        //mainPage
-        Container(
-          padding: EdgeInsets.all(40),
-          width: double.infinity,
-          height: double.infinity,
-          color: Colors.black,
-          child: TimerBuilder.periodic(
-            const Duration(seconds: 1),
-            builder: (context) {
-              return Text(
-                formatDate(DateTime.now(), [hh, ' : ', nn, ' ', am]),
-                style: const TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white),
-              );
-            },
-          ),
-        ),
-        //calendar
-        Container(
-          padding: EdgeInsets.all(40),
-          width: double.infinity,
-          height: double.infinity,
-          color: Colors.black,
-          child: Text('Calendar',
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white)),
-        ),
-        //schedule
-        Container(
-          padding: EdgeInsets.all(40),
-          width: double.infinity,
-          height: double.infinity,
-          color: Colors.black,
-          child: Text('Schedule',
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white)),
-        ),
-        //Controller
-        Container(
-          padding: EdgeInsets.all(40),
-          width: double.infinity,
-          height: double.infinity,
-          color: Colors.black,
-          child: Text('Controller',
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white)),
-        ),
+        mirror(),
+        calendar(),
+        schedule(),
+        controller(),
       ][tab],
       //
       bottomNavigationBar: BottomNavigationBar(
@@ -99,8 +50,6 @@ class _MyHomePageState extends State<MyHomePage> {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         backgroundColor: Colors.black,
-        //unselectedItemColor: Colors.grey,
-        //selectedItemColor: Colors.white,
         items: [
           BottomNavigationBarItem(
             icon: Icon(
