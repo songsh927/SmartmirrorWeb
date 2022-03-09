@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.timelapse_outlined,
+              Icons.rectangle_outlined,
               color: tab == 0 ? Colors.white : Colors.grey,
             ),
             label: 'Main',
