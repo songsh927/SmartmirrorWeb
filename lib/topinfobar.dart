@@ -5,7 +5,6 @@ import 'package:timer_builder/timer_builder.dart';
 import 'package:date_format/date_format.dart';
 import 'package:http/http.dart' as http;
 
-//292d927441fec4e541a809578e0870fe
 //lat=36.33990040535273
 //lon=127.39051453027105
 
@@ -24,7 +23,7 @@ class _topinfobarState extends State<topinfobar> {
   };
   getData() async {
     var res = await http.get(Uri.parse(
-        'http://api.openweathermap.org/data/2.5/weather?lat=36.33990040535273&lon=127.39051453027105&appid=292d927441fec4e541a809578e0870fe&units=metric'));
+        'http://api.openweathermap.org/data/2.5/weather?lat=36.33990040535273&lon=127.39051453027105&appid=${key}&units=metric'));
     if (res.statusCode == 200) {
       data = jsonDecode(res.body);
       setState(() {
