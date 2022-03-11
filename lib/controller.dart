@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:smartmirror_webview/topinfobar.dart';
 
 class controller extends StatefulWidget {
-  const controller({Key? key}) : super(key: key);
+  const controller({Key? key, this.weatherData}) : super(key: key);
+
+  final weatherData;
 
   @override
   _controllerState createState() => _controllerState();
@@ -17,7 +19,7 @@ class _controllerState extends State<controller> {
       color: Colors.black,
       child: Column(
         children: [
-          topinfobar(),
+          topinfobar(weatherData: widget.weatherData),
           Container(
             padding: EdgeInsets.all(40),
             child: Text('Controller',

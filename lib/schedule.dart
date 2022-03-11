@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:smartmirror_webview/topinfobar.dart';
 
 class schedule extends StatefulWidget {
-  const schedule({Key? key}) : super(key: key);
+  const schedule({Key? key, this.weatherData}) : super(key: key);
+
+  final weatherData;
 
   @override
   _scheduleState createState() => _scheduleState();
@@ -17,7 +19,7 @@ class _scheduleState extends State<schedule> {
       color: Colors.black,
       child: Column(
         children: [
-          topinfobar(),
+          topinfobar(weatherData: widget.weatherData),
           Container(
             padding: EdgeInsets.all(40),
             child: Text('Schedule',

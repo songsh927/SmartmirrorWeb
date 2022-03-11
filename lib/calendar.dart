@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:smartmirror_webview/topinfobar.dart';
 
 class calendar extends StatefulWidget {
-  const calendar({Key? key}) : super(key: key);
+  const calendar({Key? key, this.weatherData}) : super(key: key);
+
+  final weatherData;
 
   @override
   _calendarState createState() => _calendarState();
@@ -17,7 +19,7 @@ class _calendarState extends State<calendar> {
       color: Colors.black,
       child: Column(
         children: [
-          topinfobar(),
+          topinfobar(weatherData: widget.weatherData),
           Container(
             padding: EdgeInsets.all(40),
             child: Text('Calendar',

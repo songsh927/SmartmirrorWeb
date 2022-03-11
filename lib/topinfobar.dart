@@ -1,48 +1,21 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:timer_builder/timer_builder.dart';
 import 'package:date_format/date_format.dart';
-import 'package:http/http.dart' as http;
 
-//292d927441fec4e541a809578e0870fe
+//대전
 //lat=36.33990040535273
 //lon=127.39051453027105
 
 class topinfobar extends StatefulWidget {
-  const topinfobar({Key? key}) : super(key: key);
+  const topinfobar({Key? key, this.weatherData}) : super(key: key);
+
+  final weatherData;
 
   @override
   State<topinfobar> createState() => _topinfobarState();
 }
 
 class _topinfobarState extends State<topinfobar> {
-  var data = {};
-  var weatherData = {
-    'location': '',
-    'temp': '',
-  };
-  getData() async {
-    var res = await http.get(Uri.parse(
-        'http://api.openweathermap.org/data/2.5/weather?lat=36.33990040535273&lon=127.39051453027105&appid=292d927441fec4e541a809578e0870fe&units=metric'));
-    if (res.statusCode == 200) {
-      data = jsonDecode(res.body);
-      setState(() {
-        weatherData['location'] = data['name'].toString();
-        weatherData['temp'] = data['main']['temp'].toString();
-        print(weatherData);
-      });
-    } else {
-      data['name'] = 'loading';
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getData();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,7 +34,7 @@ class _topinfobarState extends State<topinfobar> {
           },
         ),
         Text(
-          '${weatherData['location']} \n ${weatherData['temp']} \'C',
+          '${widget.weatherData['location']} \n ${widget.weatherData['temp']} \'C',
           style: TextStyle(color: Colors.white),
         ),
         Text(
