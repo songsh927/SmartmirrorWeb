@@ -17,52 +17,20 @@ class topinfobar extends StatefulWidget {
 }
 
 class _topinfobarState extends State<topinfobar> {
-  // var data = {
-  //   "coord": {"lon": 127.3905, "lat": 36.3399},
-  //   "weather": [
-  //     {
-  //       "id": 804,
-  //       "main": "Clouds",
-  //       "description": "overcast clouds",
-  //       "icon": "04d"
-  //     }
-  //   ],
-  //   "base": "stations",
-  //   "main": {
-  //     "temp": 290.16,
-  //     "feels_like": 288.83,
-  //     "temp_min": 290.16,
-  //     "temp_max": 290.98,
-  //     "pressure": 1020,
-  //     "humidity": 35,
-  //     "sea_level": 1020,
-  //     "grnd_level": 1014
-  //   },
-  //   "visibility": 10000,
-  //   "wind": {"speed": 2.34, "deg": 260, "gust": 4.55},
-  //   "clouds": {"all": 100},
-  //   "dt": 1646901865,
-  //   "sys": {
-  //     "type": 1,
-  //     "id": 8131,
-  //     "country": "KR",
-  //     "sunrise": 1646862564,
-  //     "sunset": 1646904752
-  //   },
-  //   "timezone": 32400,
-  //   "id": 1835224,
-  //   "name": "Daejeon",
-  //   "cod": 200
-  // };
-
   var data = {};
+  var weatherData = {
+    'location': '',
+    'temp': '',
+  };
   getData() async {
     var res = await http.get(Uri.parse(
-        'http://api.openweathermap.org/data/2.5/weather?lat=36.33990040535273&lon=127.39051453027105&appid=292d927441fec4e541a809578e0870fe'));
+        'http://api.openweathermap.org/data/2.5/weather?lat=36.33990040535273&lon=127.39051453027105&appid=292d927441fec4e541a809578e0870fe&units=metric'));
     if (res.statusCode == 200) {
+      data = jsonDecode(res.body);
       setState(() {
-        data = jsonDecode(res.body);
-        print(data);
+        weatherData['location'] = data['name'].toString();
+        weatherData['temp'] = data['main']['temp'].toString();
+        print(weatherData);
       });
     } else {
       data['name'] = 'loading';
@@ -93,7 +61,7 @@ class _topinfobarState extends State<topinfobar> {
           },
         ),
         Text(
-          '${data['name']}',
+          '${weatherData['location']} \n ${weatherData['temp']} \'C',
           style: TextStyle(color: Colors.white),
         ),
         Text(
