@@ -41,21 +41,27 @@ class _MyHomePageState extends State<MyHomePage> {
   var tab = 0;
 ///////////////////////
 //TODO! secure api key
+//37.55502717455552, 126.98458770865963
   var apikey = '292d927441fec4e541a809578e0870fe';
+  var lat = 37.55502717455552;
+  var lon = 126.98458770865963;
+
   var data = {};
   var weatherData = {
     'location': '',
     'temp': '',
+    'icon': '',
   };
   getData() async {
     var res = await http.get(Uri.parse(
-        'http://api.openweathermap.org/data/2.5/weather?lat=36.33990040535273&lon=127.39051453027105&appid=${apikey}&units=metric'));
+        'http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apikey}&units=metric'));
     if (res.statusCode == 200) {
       data = jsonDecode(res.body);
       setState(() {
         weatherData['location'] = data['name'].toString();
         weatherData['temp'] = data['main']['temp'].toString();
-        print(weatherData);
+        weatherData['icon'] = data['weather'][0]['icon'];
+        print(data['weather'][0]['icon'].toString());
       });
     } else {
       data['name'] = 'loading';
