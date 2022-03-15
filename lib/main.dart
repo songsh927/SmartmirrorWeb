@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:smartmirror_webview/mirror.dart';
 // import 'package:smartmirror_webview/topinfobar.dart';
@@ -66,6 +68,9 @@ class _MyHomePageState extends State<MyHomePage> {
     } else {
       data['name'] = 'loading';
     }
+    (Timer.periodic(Duration(seconds: 60), (timer) async {
+      this.getData();
+    }));
   }
 
   @override
