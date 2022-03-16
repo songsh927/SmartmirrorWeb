@@ -1,10 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:smartmirror_webview/mirror.dart';
-// import 'package:smartmirror_webview/topinfobar.dart';
-// import 'package:weather_icons/weather_icons.dart';
-// import 'package:weather/weather.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -68,8 +64,8 @@ class _MyHomePageState extends State<MyHomePage> {
     } else {
       data['name'] = 'loading';
     }
-    (Timer.periodic(Duration(seconds: 60), (timer) async {
-      this.getData();
+    (Timer.periodic(Duration(minutes: 30), (timer) async {
+      getData();
     }));
   }
 
