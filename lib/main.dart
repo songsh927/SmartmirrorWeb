@@ -44,35 +44,47 @@ class _MyHomePageState extends State<MyHomePage> {
   var lat = 37.55502717455552;
   var lon = 126.98458770865963;
 
-  var data = {};
+  var scheduleData = [];
+  var resApiWeatherData = {};
   var weatherData = {
     'location': '',
     'temp': '',
     'icon': '',
   };
-  getData() async {
+  getWeather() async {
     var res = await http.get(Uri.parse(
         'http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apikey}&units=metric'));
     if (res.statusCode == 200) {
-      data = jsonDecode(res.body);
+      resApiWeatherData = jsonDecode(res.body);
       setState(() {
-        weatherData['location'] = data['name'].toString();
-        weatherData['temp'] = data['main']['temp'].toString();
-        weatherData['icon'] = data['weather'][0]['icon'];
-        print(data['weather'][0]['icon'].toString());
+        weatherData['location'] = resApiWeatherData['name'].toString();
+        weatherData['temp'] = resApiWeatherData['main']['temp'].toString();
+        weatherData['icon'] = resApiWeatherData['weather'][0]['icon'];
+        print(resApiWeatherData['weather'][0]['icon'].toString());
       });
     } else {
-      data['name'] = 'loading';
+      resApiWeatherData['name'] = 'loading';
     }
     (Timer.periodic(Duration(minutes: 30), (timer) async {
-      getData();
+      getWeather();
     }));
+  }
+
+  getSchedule() async {
+    var res = await http.get(Uri.parse('http://localhost:3000/schedule'));
+    if (res.statusCode == 200) {
+      scheduleData = jsonDecode(res.body);
+      setState(() {
+        print(scheduleData);
+      });
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    getData();
+    getWeather();
+    getSchedule();
   }
 
 ////////////////////////
@@ -82,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: [
         mirror(weatherData: weatherData),
         calendar(weatherData: weatherData),
-        schedule(weatherData: weatherData),
+        schedule(weatherData: weatherData, scheduleData: scheduleData),
         controller(weatherData: weatherData),
       ][tab],
       //
