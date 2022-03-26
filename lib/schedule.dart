@@ -14,6 +14,8 @@ class schedule extends StatefulWidget {
 class _scheduleState extends State<schedule> {
   var scroll = ScrollController();
 
+  var _todaySchedule = [];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,32 +33,57 @@ class _scheduleState extends State<schedule> {
                   controller: scroll,
                   itemBuilder: (c, i) {
                     return Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                          color: Colors.black,
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey,
-                                offset: Offset(0.0, 1.0),
-                                blurRadius: 6.0)
-                          ]),
-                      padding: EdgeInsets.all(10),
-                      margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      alignment: Alignment.topLeft,
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        height: 70,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(4.0)),
+                            color: Colors.black,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey,
+                                  offset: Offset(0.0, 1.0),
+                                  blurRadius: 6.0)
+                            ]),
+                        padding: EdgeInsets.all(10),
+                        margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        alignment: Alignment.topLeft,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(
-                              'title: ${widget.scheduleData[i]['title'].toString()}',
-                              style: TextStyle(color: Colors.white),
+                            SizedBox(
+                              width: double.infinity,
+                              // height: ,
+                              child: Text(
+                                'date: ${widget.scheduleData[i]['date'].toString()}',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 18),
+                              ),
                             ),
-                            Text(
-                                'text: ${widget.scheduleData[i]['text'].toString()}',
-                                style: TextStyle(color: Colors.white)),
-                          ]),
-                    );
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: 100,
+                                    // height: ,
+                                    child: Text(
+                                      'title: ${widget.scheduleData[i]['title'].toString()}',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 18),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    // width: ,
+                                    // height: ,
+                                    child: Text(
+                                      'text: ${widget.scheduleData[i]['text'].toString()}',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 18),
+                                    ),
+                                  ),
+                                ]),
+                          ],
+                        ));
                   }))
         ],
       ),

@@ -41,10 +41,6 @@ class _topinfobarState extends State<topinfobar> {
                 ".png"),
           ],
         ),
-        Text(
-          '미세먼지',
-          style: TextStyle(color: Colors.white),
-        )
       ]),
     );
   }

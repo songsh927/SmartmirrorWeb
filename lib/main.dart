@@ -3,13 +3,42 @@ import 'package:flutter/material.dart';
 import 'package:smartmirror_webview/mirror.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:provider/provider.dart';
 
 import 'calendar.dart';
 import 'controller.dart';
 import 'schedule.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (c) => ControllerStore()),
+  ], child: MyApp()));
+}
+
+class ControllerStore extends ChangeNotifier {
+  bool isCheckedLight = false;
+  bool isCheckedCurtain = false;
+  bool isCheckedTemp = false;
+
+  getStatus(id) async {
+    http.Response res = await http.get(
+        Uri.parse('http://localhost:3000/remote/${id}'),
+        headers: {"Content-Type": "application/json"});
+    //print(res.body);
+    if (res.body == 'on') {
+      isCheckedTemp = true;
+    }
+    print(isCheckedTemp);
+  }
+
+  changeStatus(id, ctrl) async {
+    var status = {"ctrl": ctrl};
+
+    http.Response res = await http.post(
+        Uri.parse('http://localhost:3000/remote/${id}'),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(status));
+  }
 }
 
 class MyApp extends StatelessWidget {

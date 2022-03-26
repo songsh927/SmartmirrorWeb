@@ -30,9 +30,38 @@ class _calendarState extends State<calendar> {
             child: SizedBox(
               height: 400,
               child: TableCalendar(
-                calendarBuilders: CalendarBuilders(
-                  dowBuilder: (context, day) {},
+                headerStyle: const HeaderStyle(
+                  titleTextStyle: TextStyle(color: Colors.white, fontSize: 25),
+                  formatButtonTextStyle:
+                      TextStyle(color: Colors.black, fontSize: 16.0),
+                  formatButtonDecoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5.0),
+                    ),
+                  ),
                 ),
+                daysOfWeekStyle: const DaysOfWeekStyle(
+                  weekdayStyle: TextStyle(color: Colors.white),
+                  //weekendStyle: TextStyle(color: Colors.white),
+                ),
+                calendarStyle: const CalendarStyle(
+                  //weekendTextStyle: TextStyle(color: Colors.white),
+                  defaultTextStyle: TextStyle(color: Colors.white),
+                  // highlighted color for today
+                  todayDecoration: BoxDecoration(
+                    color: Colors.grey,
+                    shape: BoxShape.circle,
+                  ),
+                  // highlighted color for selected day
+                  selectedDecoration: BoxDecoration(
+                    color: Colors.blueGrey,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                // calendarBuilders: CalendarBuilders(
+                //   dowBuilder: (context, day) {},
+                // ),
                 focusedDay: DateTime.now(),
                 firstDay: DateTime.utc(2010, 1, 1),
                 lastDay: DateTime.utc(2040, 12, 31),

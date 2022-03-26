@@ -1,5 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smartmirror_webview/main.dart';
 import 'package:smartmirror_webview/topinfobar.dart';
+import 'package:http/http.dart' as http;
 
 class controller extends StatefulWidget {
   const controller({Key? key, this.weatherData}) : super(key: key);
@@ -11,9 +15,35 @@ class controller extends StatefulWidget {
 }
 
 class _controllerState extends State<controller> {
-  bool _isCheckedLight = false;
-  bool _isCheckedCurtain = false;
-  bool _isCheckedTemp = false;
+  // bool isCheckedLight = false;
+  // bool isCheckedCurtain = false;
+  // bool isCheckedTemp = false;
+
+  // getStatus(id) async {
+  //   http.Response res = await http.get(
+  //       Uri.parse('http://localhost:3000/remote/${id}'),
+  //       headers: {"Content-Type": "application/json"});
+  //   //print(res.body);
+  //   if (res.body == 'on') {
+  //     isCheckedTemp = true;
+  //   }
+  //   print(isCheckedTemp);
+  // }
+
+  // changeStatus(id, ctrl) async {
+  //   var status = {"ctrl": ctrl};
+
+  //   http.Response res = await http.post(
+  //       Uri.parse('http://localhost:3000/remote/${id}'),
+  //       headers: {"Content-Type": "application/json"},
+  //       body: jsonEncode(status));
+  // }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getStatus('tempcontroller');
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +88,10 @@ class _controllerState extends State<controller> {
                         color: Colors.white),
                   ),
                   Switch(
-                    value: _isCheckedLight,
+                    value: context.watch<ControllerStore>().isCheckedLight,
                     onChanged: (value) {
                       setState(() {
-                        _isCheckedLight = value;
+                        context.watch<ControllerStore>().isCheckedLight = value;
                       });
                     },
                     activeColor: Colors.white,
@@ -107,10 +137,12 @@ class _controllerState extends State<controller> {
                         color: Colors.white),
                   ),
                   Switch(
-                    value: _isCheckedCurtain,
+                    value: context.watch<ControllerStore>().isCheckedCurtain,
                     onChanged: (value) {
                       setState(() {
-                        _isCheckedCurtain = value;
+                        //changeStatus(id, status)
+                        context.watch<ControllerStore>().isCheckedCurtain =
+                            value;
                       });
                     },
                     activeColor: Colors.white,
@@ -156,11 +188,21 @@ class _controllerState extends State<controller> {
                         color: Colors.white),
                   ),
                   Switch(
-                    value: _isCheckedTemp,
+                    value: context.watch<ControllerStore>().isCheckedTemp,
                     onChanged: (value) {
                       setState(() {
-                        _isCheckedTemp = value;
+                        if (value == true) {
+                          context
+                              .read<ControllerStore>()
+                              .changeStatus('tempcontroller', 'on');
+                        } else {
+                          context
+                              .read<ControllerStore>()
+                              .changeStatus('tempcontroller', 'off');
+                        }
+                        context.read<ControllerStore>().isCheckedTemp = value;
                       });
+                      print(context.read<ControllerStore>().isCheckedTemp);
                     },
                     activeColor: Colors.white,
                     activeTrackColor: Colors.white,
