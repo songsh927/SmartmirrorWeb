@@ -15,34 +15,10 @@ class controller extends StatefulWidget {
 }
 
 class _controllerState extends State<controller> {
-  // bool isCheckedLight = false;
-  // bool isCheckedCurtain = false;
-  // bool isCheckedTemp = false;
-
-  // getStatus(id) async {
-  //   http.Response res = await http.get(
-  //       Uri.parse('http://localhost:3000/remote/${id}'),
-  //       headers: {"Content-Type": "application/json"});
-  //   //print(res.body);
-  //   if (res.body == 'on') {
-  //     isCheckedTemp = true;
-  //   }
-  //   print(isCheckedTemp);
-  // }
-
-  // changeStatus(id, ctrl) async {
-  //   var status = {"ctrl": ctrl};
-
-  //   http.Response res = await http.post(
-  //       Uri.parse('http://localhost:3000/remote/${id}'),
-  //       headers: {"Content-Type": "application/json"},
-  //       body: jsonEncode(status));
-  // }
-
   // @override
   // void initState() {
   //   super.initState();
-  //   getStatus('tempcontroller');
+  //   context.read<ControllerStore>().getStatus();
   // }
 
   @override
@@ -88,10 +64,19 @@ class _controllerState extends State<controller> {
                         color: Colors.white),
                   ),
                   Switch(
-                    value: context.watch<ControllerStore>().isCheckedLight,
+                    value: context.read<ControllerStore>().isCheckedLight,
                     onChanged: (value) {
                       setState(() {
-                        context.watch<ControllerStore>().isCheckedLight = value;
+                        if (value == true) {
+                          context
+                              .read<ControllerStore>()
+                              .changeStatus('lightcontroller', 'on');
+                        } else {
+                          context
+                              .read<ControllerStore>()
+                              .changeStatus('lightcontroller', 'off');
+                        }
+                        context.read<ControllerStore>().isCheckedLight = value;
                       });
                     },
                     activeColor: Colors.white,
@@ -137,11 +122,19 @@ class _controllerState extends State<controller> {
                         color: Colors.white),
                   ),
                   Switch(
-                    value: context.watch<ControllerStore>().isCheckedCurtain,
+                    value: context.read<ControllerStore>().isCheckedCurtain,
                     onChanged: (value) {
                       setState(() {
-                        //changeStatus(id, status)
-                        context.watch<ControllerStore>().isCheckedCurtain =
+                        if (value == true) {
+                          context
+                              .read<ControllerStore>()
+                              .changeStatus('curtaincontroller', 'on');
+                        } else {
+                          context
+                              .read<ControllerStore>()
+                              .changeStatus('curtaincontroller', 'off');
+                        }
+                        context.read<ControllerStore>().isCheckedCurtain =
                             value;
                       });
                     },

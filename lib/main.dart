@@ -20,15 +20,26 @@ class ControllerStore extends ChangeNotifier {
   bool isCheckedCurtain = false;
   bool isCheckedTemp = false;
 
-  getStatus(id) async {
+  getStatus() async {
     http.Response res = await http.get(
-        Uri.parse('http://localhost:3000/remote/${id}'),
+        Uri.parse('http://localhost:3000/remote/'),
         headers: {"Content-Type": "application/json"});
-    //print(res.body);
-    if (res.body == 'on') {
-      isCheckedTemp = true;
+    var statusData = jsonDecode(res.body);
+    if (statusData['lightStatus'] == 'on') {
+      isCheckedLight = true;
+    } else {
+      isCheckedLight = false;
     }
-    print(isCheckedTemp);
+    if (statusData['curtainStatus'] == 'on') {
+      isCheckedCurtain = true;
+    } else {
+      isCheckedCurtain = false;
+    }
+    if (statusData['tempStatus'] == 'on') {
+      isCheckedTemp = true;
+    } else {
+      isCheckedTemp = false;
+    }
   }
 
   changeStatus(id, ctrl) async {
