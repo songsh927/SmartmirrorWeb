@@ -195,7 +195,6 @@ class _controllerState extends State<controller> {
                         }
                         context.read<ControllerStore>().isCheckedTemp = value;
                       });
-                      print(context.read<ControllerStore>().isCheckedTemp);
                     },
                     activeColor: Colors.white,
                     activeTrackColor: Colors.white,

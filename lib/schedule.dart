@@ -1,12 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
 import 'package:smartmirror_webview/topinfobar.dart';
 
 class schedule extends StatefulWidget {
-  const schedule({Key? key, this.weatherData, this.scheduleData})
-      : super(key: key);
+  const schedule({Key? key, this.weatherData}) : super(key: key);
 
   final weatherData;
-  final scheduleData;
   @override
   _scheduleState createState() => _scheduleState();
 }
@@ -15,6 +17,24 @@ class _scheduleState extends State<schedule> {
   var scroll = ScrollController();
 
   var _todaySchedule = [];
+  var todayDate = DateFormat("yyyyMMdd").format(DateTime.now());
+  getTodaySchedule(todayDate) async {
+    var res = await http
+        .get(Uri.parse('http://localhost:3000/schedule?date=${todayDate}'));
+
+    if (res.statusCode == 200) {
+      setState(() {
+        _todaySchedule = jsonDecode(res.body);
+      });
+      ;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getTodaySchedule(todayDate);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +49,7 @@ class _scheduleState extends State<schedule> {
               child: ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: widget.scheduleData.length,
+                  itemCount: _todaySchedule.length,
                   controller: scroll,
                   itemBuilder: (c, i) {
                     return Container(
@@ -55,7 +75,7 @@ class _scheduleState extends State<schedule> {
                               width: double.infinity,
                               // height: ,
                               child: Text(
-                                'date: ${widget.scheduleData[i]['date'].toString()}',
+                                'date: ${_todaySchedule[i]['date'].toString()}',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 18),
                               ),
@@ -67,16 +87,14 @@ class _scheduleState extends State<schedule> {
                                     width: 100,
                                     // height: ,
                                     child: Text(
-                                      'title: ${widget.scheduleData[i]['title'].toString()}',
+                                      'title: ${_todaySchedule[i]['title'].toString()}',
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 18),
                                     ),
                                   ),
                                   SizedBox(
-                                    // width: ,
-                                    // height: ,
                                     child: Text(
-                                      'text: ${widget.scheduleData[i]['text'].toString()}',
+                                      'text: ${_todaySchedule[i]['text'].toString()}',
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 18),
                                     ),

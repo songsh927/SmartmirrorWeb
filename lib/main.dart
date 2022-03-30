@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
 ///////////////////////
 //TODO! secure api key
 //37.55502717455552, 126.98458770865963
-  var apikey = '292d927441fec4e541a809578e0870fe';
+  var apikey = '';
   var lat = 37.55502717455552;
   var lon = 126.98458770865963;
 
@@ -93,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
   };
   getWeather() async {
     var res = await http.get(Uri.parse(
-        'http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apikey}&units=metric'));
+        'https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apikey}&units=metric'));
     if (res.statusCode == 200) {
       resApiWeatherData = jsonDecode(res.body);
       setState(() {
@@ -134,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: [
         mirror(weatherData: weatherData),
         calendar(weatherData: weatherData),
-        schedule(weatherData: weatherData, scheduleData: scheduleData),
+        schedule(weatherData: weatherData),
         controller(weatherData: weatherData),
       ][tab],
       //
