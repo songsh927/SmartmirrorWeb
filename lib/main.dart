@@ -4,6 +4,7 @@ import 'package:smartmirror_webview/mirror.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:provider/provider.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 import 'calendar.dart';
 import 'controller.dart';
@@ -61,13 +62,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -100,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
         weatherData['location'] = resApiWeatherData['name'].toString();
         weatherData['temp'] = resApiWeatherData['main']['temp'].toString();
         weatherData['icon'] = resApiWeatherData['weather'][0]['icon'];
-        print(resApiWeatherData['weather'][0]['icon'].toString());
+        //print(resApiWeatherData['weather'][0]['icon'].toString());
       });
     } else {
       resApiWeatherData['name'] = 'loading';
@@ -114,9 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
     var res = await http.get(Uri.parse('http://localhost:3000/schedule'));
     if (res.statusCode == 200) {
       scheduleData = jsonDecode(res.body);
-      setState(() {
-        print(scheduleData);
-      });
+      setState(() {});
     }
   }
 
