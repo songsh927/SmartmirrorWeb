@@ -15,12 +15,6 @@ class controller extends StatefulWidget {
 }
 
 class _controllerState extends State<controller> {
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   context.read<ControllerStore>().getStatus();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,7 +31,7 @@ class _controllerState extends State<controller> {
               width: double.infinity,
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.white),
-                  borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   boxShadow: [
                     BoxShadow(
                         color: Colors.black,
@@ -45,7 +39,7 @@ class _controllerState extends State<controller> {
                         blurRadius: 6.0)
                   ]),
               padding: EdgeInsets.all(20),
-              margin: EdgeInsets.fromLTRB(5, 10, 5, 10),
+              margin: EdgeInsets.fromLTRB(50, 20, 50, 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -95,7 +89,7 @@ class _controllerState extends State<controller> {
               width: double.infinity,
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.white),
-                  borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   boxShadow: [
                     BoxShadow(
                         color: Colors.black,
@@ -103,7 +97,7 @@ class _controllerState extends State<controller> {
                         blurRadius: 6.0)
                   ]),
               padding: EdgeInsets.all(20),
-              margin: EdgeInsets.fromLTRB(5, 10, 5, 10),
+              margin: EdgeInsets.fromLTRB(50, 20, 50, 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -154,7 +148,7 @@ class _controllerState extends State<controller> {
               width: double.infinity,
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.white),
-                  borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   boxShadow: [
                     BoxShadow(
                         color: Colors.black,
@@ -162,7 +156,7 @@ class _controllerState extends State<controller> {
                         blurRadius: 6.0)
                   ]),
               padding: EdgeInsets.all(20),
-              margin: EdgeInsets.fromLTRB(5, 10, 5, 10),
+              margin: EdgeInsets.fromLTRB(50, 20, 50, 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

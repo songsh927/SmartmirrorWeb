@@ -137,50 +137,54 @@ class _MyHomePageState extends State<MyHomePage> {
         controller(weatherData: weatherData),
       ][tab],
       //
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        backgroundColor: Colors.black,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.rectangle_outlined,
-              color: tab == 0 ? Colors.white : Colors.grey,
+      bottomNavigationBar: SizedBox(
+        height: 100,
+        width: double.infinity,
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          backgroundColor: Colors.black,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.rectangle_outlined,
+                color: tab == 0 ? Colors.white : Colors.grey,
+              ),
+              label: 'Main',
+              //activeIcon: Icon(Icons.timelapse_outlined),
             ),
-            label: 'Main',
-            //activeIcon: Icon(Icons.timelapse_outlined),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.calendar_month_outlined,
-              color: tab == 1 ? Colors.white : Colors.grey,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.calendar_month_outlined,
+                color: tab == 1 ? Colors.white : Colors.grey,
+              ),
+              label: 'Calendar',
+              //activeIcon: Icon(Icons.calendar_month),
             ),
-            label: 'Calendar',
-            //activeIcon: Icon(Icons.calendar_month),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.schedule_outlined,
-              color: tab == 2 ? Colors.white : Colors.grey,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.schedule_outlined,
+                color: tab == 2 ? Colors.white : Colors.grey,
+              ),
+              label: 'Schedule',
+              //activeIcon: Icon(Icons.schedule),
             ),
-            label: 'Schedule',
-            //activeIcon: Icon(Icons.schedule),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.cloud_circle_outlined,
-              color: tab == 3 ? Colors.white : Colors.grey,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.cloud_circle_outlined,
+                color: tab == 3 ? Colors.white : Colors.grey,
+              ),
+              label: 'Controller',
+              //activeIcon: Icon(Icons.cloud),
             ),
-            label: 'Controller',
-            //activeIcon: Icon(Icons.cloud),
-          ),
-        ],
-        onTap: (i) {
-          setState(() {
-            tab = i;
-          });
-        },
+          ],
+          onTap: (i) {
+            setState(() {
+              tab = i;
+            });
+          },
+        ),
       ),
     );
   }

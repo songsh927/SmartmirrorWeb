@@ -53,10 +53,12 @@ class _scheduleState extends State<schedule> {
     });
     socket.connect();
     socket.on('schedules', (data) {
-      try {
-        addTodaySchedule(data);
-      } finally {
-        data = null;
+      if (data['date'].toString() == todayDate) {
+        try {
+          addTodaySchedule(data);
+        } finally {
+          data = null;
+        }
       }
     });
   }
@@ -81,7 +83,7 @@ class _scheduleState extends State<schedule> {
                 controller: scroll,
                 itemBuilder: (c, i) {
                   return Container(
-                      height: 70,
+                      height: 100,
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.white),
                           borderRadius: BorderRadius.all(Radius.circular(4.0)),
@@ -93,7 +95,7 @@ class _scheduleState extends State<schedule> {
                                 blurRadius: 6.0)
                           ]),
                       padding: EdgeInsets.all(10),
-                      margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      margin: EdgeInsets.fromLTRB(70, 10, 70, 10),
                       alignment: Alignment.topLeft,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,

@@ -15,6 +15,7 @@ class _topinfobarState extends State<topinfobar> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.fromLTRB(70, 0, 70, 0),
       padding: EdgeInsets.all(30),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         TimerBuilder.periodic(
