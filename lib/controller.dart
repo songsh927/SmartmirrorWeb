@@ -64,11 +64,13 @@ class _controllerState extends State<controller> {
                         if (value == true) {
                           context
                               .read<ControllerStore>()
-                              .changeStatus('lightcontroller', 'on');
+                              //.changeStatus('lightcontroller', 'on');
+                              .changeStatus('lightStatus', 'on');
                         } else {
                           context
                               .read<ControllerStore>()
-                              .changeStatus('lightcontroller', 'off');
+                              //.changeStatus('lightcontroller', 'off');
+                              .changeStatus('lightStatus', 'off');
                         }
                         context.read<ControllerStore>().isCheckedLight = value;
                       });
@@ -122,11 +124,13 @@ class _controllerState extends State<controller> {
                         if (value == true) {
                           context
                               .read<ControllerStore>()
-                              .changeStatus('curtaincontroller', 'on');
+                              //.changeStatus('curtaincontroller', 'on');
+                              .changeStatus('curtainStatus', 'on');
                         } else {
                           context
                               .read<ControllerStore>()
-                              .changeStatus('curtaincontroller', 'off');
+                              //.changeStatus('curtaincontroller', 'off');
+                              .changeStatus('curtainStatus', 'off');
                         }
                         context.read<ControllerStore>().isCheckedCurtain =
                             value;
@@ -181,11 +185,13 @@ class _controllerState extends State<controller> {
                         if (value == true) {
                           context
                               .read<ControllerStore>()
-                              .changeStatus('tempcontroller', 'on');
+                              //.changeStatus('tempcontroller', 'on');
+                              .changeStatus('tempStatus', 'on');
                         } else {
                           context
                               .read<ControllerStore>()
-                              .changeStatus('tempcontroller', 'off');
+                              //.changeStatus('tempcontroller', 'off');
+                              .changeStatus('tempStatus', 'off');
                         }
                         context.read<ControllerStore>().isCheckedTemp = value;
                       });

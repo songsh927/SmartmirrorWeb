@@ -44,12 +44,14 @@ class ControllerStore extends ChangeNotifier {
   }
 
   changeStatus(id, ctrl) async {
-    var status = {"ctrl": ctrl};
+    //var status = {"ctrl": ctrl};
 
     http.Response res = await http.post(
-        Uri.parse('http://localhost:3000/remote/${id}'),
-        headers: {"Content-Type": "application/json"},
-        body: jsonEncode(status));
+        //Uri.parse('http://localhost:3000/remote/controller/${id}/${ctrl}'),
+        Uri.parse('http://localhost:3000/remote/controller/${id}?ctrl=${ctrl}'),
+        //http://localhost:3000/remote/controller/lightStatus?ctrl=on
+        headers: {"Content-Type": "application/json"});
+    //body: jsonEncode(status));
   }
 }
 
@@ -79,7 +81,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   var tab = 0;
 ///////////////////////
-//TODO! secure api key
+//TODO! secure api key  9b0570fdbc3e5439812a6963a8c89609
 //37.55502717455552, 126.98458770865963
   var apikey = '';
   var lat = 37.55502717455552;
