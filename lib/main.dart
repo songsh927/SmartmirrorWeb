@@ -4,7 +4,6 @@ import 'package:smartmirror_webview/mirror.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:provider/provider.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 import 'calendar.dart';
 import 'controller.dart';
@@ -44,14 +43,13 @@ class ControllerStore extends ChangeNotifier {
   }
 
   changeStatus(id, ctrl) async {
-    //var status = {"ctrl": ctrl};
-
+    var status = {"ctrl": ctrl};
     http.Response res = await http.post(
-        //Uri.parse('http://localhost:3000/remote/controller/${id}/${ctrl}'),
-        Uri.parse('http://localhost:3000/remote/controller/${id}?ctrl=${ctrl}'),
-        //http://localhost:3000/remote/controller/lightStatus?ctrl=on
-        headers: {"Content-Type": "application/json"});
-    //body: jsonEncode(status));
+        Uri.parse('http://localhost:3000/remote/${id}'),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(status));
+
+    print(res);
   }
 }
 
@@ -83,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
 ///////////////////////
 //TODO! secure api key  9b0570fdbc3e5439812a6963a8c89609
 //37.55502717455552, 126.98458770865963
-  var apikey = '';
+  var apikey = '9b0570fdbc3e5439812a6963a8c89609';
   var lat = 37.55502717455552;
   var lon = 126.98458770865963;
 
@@ -103,7 +101,6 @@ class _MyHomePageState extends State<MyHomePage> {
         weatherData['location'] = resApiWeatherData['name'].toString();
         weatherData['temp'] = resApiWeatherData['main']['temp'].toString();
         weatherData['icon'] = resApiWeatherData['weather'][0]['icon'];
-        //print(resApiWeatherData['weather'][0]['icon'].toString());
       });
     } else {
       resApiWeatherData['name'] = 'loading';
@@ -138,7 +135,6 @@ class _MyHomePageState extends State<MyHomePage> {
         schedule(weatherData: weatherData),
         controller(weatherData: weatherData),
       ][tab],
-      //
       bottomNavigationBar: SizedBox(
         height: 100,
         width: double.infinity,
@@ -154,7 +150,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: tab == 0 ? Colors.white : Colors.grey,
               ),
               label: 'Main',
-              //activeIcon: Icon(Icons.timelapse_outlined),
             ),
             BottomNavigationBarItem(
               icon: Icon(
@@ -162,7 +157,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: tab == 1 ? Colors.white : Colors.grey,
               ),
               label: 'Calendar',
-              //activeIcon: Icon(Icons.calendar_month),
             ),
             BottomNavigationBarItem(
               icon: Icon(
@@ -170,7 +164,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: tab == 2 ? Colors.white : Colors.grey,
               ),
               label: 'Schedule',
-              //activeIcon: Icon(Icons.schedule),
             ),
             BottomNavigationBarItem(
               icon: Icon(
@@ -178,7 +171,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: tab == 3 ? Colors.white : Colors.grey,
               ),
               label: 'Controller',
-              //activeIcon: Icon(Icons.cloud),
             ),
           ],
           onTap: (i) {

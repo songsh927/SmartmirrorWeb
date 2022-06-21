@@ -51,7 +51,6 @@ class _calendarState extends State<calendar> {
           Container(
             padding: EdgeInsets.all(40),
             child: SizedBox(
-              //height: double.maxFinite,
               child: TableCalendar(
                 rowHeight: 100,
                 headerStyle: const HeaderStyle(
@@ -77,15 +76,11 @@ class _calendarState extends State<calendar> {
                     color: Colors.grey,
                     shape: BoxShape.circle,
                   ),
-                  // highlighted color for selected day
                   selectedDecoration: BoxDecoration(
                     color: Colors.blueGrey,
                     shape: BoxShape.circle,
                   ),
                 ),
-                // calendarBuilders: CalendarBuilders(
-                //   dowBuilder: (context, day) {},
-                // ),
                 focusedDay: DateTime.now(),
                 firstDay: DateTime.utc(2010, 1, 1),
                 lastDay: DateTime.utc(2040, 12, 31),

@@ -50,13 +50,13 @@ class _controllerState extends State<controller> {
                         fontWeight: FontWeight.w100,
                         color: Colors.white),
                   ),
-                  Text(
-                    'State',
-                    style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w100,
-                        color: Colors.white),
-                  ),
+                  // Text(
+                  //   'State',
+                  //   style: TextStyle(
+                  //       fontSize: 10,
+                  //       fontWeight: FontWeight.w100,
+                  //       color: Colors.white),
+                  // ),
                   Switch(
                     value: context.read<ControllerStore>().isCheckedLight,
                     onChanged: (value) {
@@ -64,13 +64,11 @@ class _controllerState extends State<controller> {
                         if (value == true) {
                           context
                               .read<ControllerStore>()
-                              //.changeStatus('lightcontroller', 'on');
-                              .changeStatus('lightStatus', 'on');
+                              .changeStatus('lightcontroller', '1');
                         } else {
                           context
                               .read<ControllerStore>()
-                              //.changeStatus('lightcontroller', 'off');
-                              .changeStatus('lightStatus', 'off');
+                              .changeStatus('lightcontroller', '0');
                         }
                         context.read<ControllerStore>().isCheckedLight = value;
                       });
@@ -110,13 +108,13 @@ class _controllerState extends State<controller> {
                         fontWeight: FontWeight.w100,
                         color: Colors.white),
                   ),
-                  Text(
-                    'State',
-                    style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w100,
-                        color: Colors.white),
-                  ),
+                  // Text(
+                  //   'State',
+                  //   style: TextStyle(
+                  //       fontSize: 10,
+                  //       fontWeight: FontWeight.w100,
+                  //       color: Colors.white),
+                  // ),
                   Switch(
                     value: context.read<ControllerStore>().isCheckedCurtain,
                     onChanged: (value) {
@@ -124,13 +122,11 @@ class _controllerState extends State<controller> {
                         if (value == true) {
                           context
                               .read<ControllerStore>()
-                              //.changeStatus('curtaincontroller', 'on');
-                              .changeStatus('curtainStatus', 'on');
+                              .changeStatus('curtaincontroller', '1');
                         } else {
                           context
                               .read<ControllerStore>()
-                              //.changeStatus('curtaincontroller', 'off');
-                              .changeStatus('curtainStatus', 'off');
+                              .changeStatus('curtaincontroller', '0');
                         }
                         context.read<ControllerStore>().isCheckedCurtain =
                             value;
@@ -171,13 +167,13 @@ class _controllerState extends State<controller> {
                         fontWeight: FontWeight.w100,
                         color: Colors.white),
                   ),
-                  Text(
-                    'State',
-                    style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w100,
-                        color: Colors.white),
-                  ),
+                  // Text(
+                  //   'State',
+                  //   style: TextStyle(
+                  //       fontSize: 10,
+                  //       fontWeight: FontWeight.w100,
+                  //       color: Colors.white),
+                  // ),
                   Switch(
                     value: context.watch<ControllerStore>().isCheckedTemp,
                     onChanged: (value) {
@@ -185,13 +181,11 @@ class _controllerState extends State<controller> {
                         if (value == true) {
                           context
                               .read<ControllerStore>()
-                              //.changeStatus('tempcontroller', 'on');
-                              .changeStatus('tempStatus', 'on');
+                              .changeStatus('tempcontroller', '1');
                         } else {
                           context
                               .read<ControllerStore>()
-                              //.changeStatus('tempcontroller', 'off');
-                              .changeStatus('tempStatus', 'off');
+                              .changeStatus('tempcontroller', '0');
                         }
                         context.read<ControllerStore>().isCheckedTemp = value;
                       });
