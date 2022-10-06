@@ -50,13 +50,6 @@ class _controllerState extends State<controller> {
                         fontWeight: FontWeight.w100,
                         color: Colors.white),
                   ),
-                  // Text(
-                  //   'State',
-                  //   style: TextStyle(
-                  //       fontSize: 10,
-                  //       fontWeight: FontWeight.w100,
-                  //       color: Colors.white),
-                  // ),
                   Switch(
                     value: context.read<ControllerStore>().isCheckedLight,
                     onChanged: (value) {
@@ -108,13 +101,6 @@ class _controllerState extends State<controller> {
                         fontWeight: FontWeight.w100,
                         color: Colors.white),
                   ),
-                  // Text(
-                  //   'State',
-                  //   style: TextStyle(
-                  //       fontSize: 10,
-                  //       fontWeight: FontWeight.w100,
-                  //       color: Colors.white),
-                  // ),
                   Switch(
                     value: context.read<ControllerStore>().isCheckedCurtain,
                     onChanged: (value) {
@@ -141,7 +127,7 @@ class _controllerState extends State<controller> {
               ),
             ),
           ),
-          //
+
           Flexible(
             fit: FlexFit.tight,
             child: Container(
@@ -167,13 +153,6 @@ class _controllerState extends State<controller> {
                         fontWeight: FontWeight.w100,
                         color: Colors.white),
                   ),
-                  // Text(
-                  //   'State',
-                  //   style: TextStyle(
-                  //       fontSize: 10,
-                  //       fontWeight: FontWeight.w100,
-                  //       color: Colors.white),
-                  // ),
                   Switch(
                     value: context.watch<ControllerStore>().isCheckedTemp,
                     onChanged: (value) {

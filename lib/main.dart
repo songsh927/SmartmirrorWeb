@@ -20,27 +20,35 @@ class ControllerStore extends ChangeNotifier {
   bool isCheckedCurtain = false;
   bool isCheckedTemp = false;
 
-  getStatus() async {
-    http.Response res = await http.get(
-        Uri.parse('http://localhost:3000/remote/'),
-        headers: {"Content-Type": "application/json"});
-    var statusData = jsonDecode(res.body);
-    if (statusData['lightStatus'] == 'on') {
-      isCheckedLight = true;
-    } else {
-      isCheckedLight = false;
-    }
-    if (statusData['curtainStatus'] == 'on') {
-      isCheckedCurtain = true;
-    } else {
-      isCheckedCurtain = false;
-    }
-    if (statusData['tempStatus'] == 'on') {
-      isCheckedTemp = true;
-    } else {
-      isCheckedTemp = false;
-    }
-  }
+/*
+모듈데이터 받아오는 부분 
+수정필요
+*/
+  // getStatus() async {
+  //   http.Response res = await http.get(
+  //       Uri.parse('http://localhost:3000/remote/'),
+  //       headers: {"Content-Type": "application/json"});
+  //   var statusData = jsonDecode(res.body);
+  //   if (statusData['lightStatus'] == 'on') {
+  //     isCheckedLight = true;
+  //   } else {
+  //     isCheckedLight = false;
+  //   }
+  //   if (statusData['curtainStatus'] == 'on') {
+  //     isCheckedCurtain = true;
+  //   } else {
+  //     isCheckedCurtain = false;
+  //   }
+  //   if (statusData['tempStatus'] == 'on') {
+  //     isCheckedTemp = true;
+  //   } else {
+  //     isCheckedTemp = false;
+  //   }
+  // }
+
+/*
+모듈 제어 통신 함수
+*/
 
   changeStatus(id, ctrl) async {
     var status = {"ctrl": ctrl};
@@ -78,9 +86,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var tab = 0;
-///////////////////////
+/*
+api key 저장 변수 보안 수정필요
 //TODO! secure api key  9b0570fdbc3e5439812a6963a8c89609
 //37.55502717455552, 126.98458770865963
+*/
   var apikey = '9b0570fdbc3e5439812a6963a8c89609';
   var lat = 37.55502717455552;
   var lon = 126.98458770865963;
@@ -121,11 +131,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    getWeather();
+    //getWeather();
     getSchedule();
   }
 
-////////////////////////
   @override
   Widget build(BuildContext context) {
     return Scaffold(
