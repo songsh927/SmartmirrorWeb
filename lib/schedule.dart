@@ -73,9 +73,6 @@ class _scheduleState extends State<schedule> {
         children: [
           topinfobar(weatherData: widget.weatherData),
           Flexible(
-            // color: Colors.grey,
-            // width: double.infinity,
-            // height: 650,
             child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,

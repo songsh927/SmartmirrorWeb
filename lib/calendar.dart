@@ -112,13 +112,15 @@ class _calendarState extends State<calendar> {
               ),
               SizedBox(
                 width: 600,
-                height: 500,
+                height: 700,
                 child: ListView.builder(
                     itemCount: todayEvent.length,
                     itemBuilder: (c, i) {
                       return Container(
                         width: double.infinity,
                         height: 100,
+                        margin: EdgeInsets.fromLTRB(70, 10, 70, 10),
+                        padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.white),
                             borderRadius:
@@ -129,11 +131,19 @@ class _calendarState extends State<calendar> {
                                   offset: Offset(0.0, 1.0),
                                   blurRadius: 6.0)
                             ]),
-                        margin: EdgeInsets.fromLTRB(70, 10, 70, 10),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              todayEvent[i]['title'],
+                              'title: ${todayEvent[i]['title']}',
+                              style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.white),
+                            ),
+                            Text(
+                              'text: ${todayEvent[i]['text']}',
                               style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.w400,
