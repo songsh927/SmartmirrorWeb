@@ -20,6 +20,7 @@ class _scheduleState extends State<schedule> {
   late IO.Socket socket;
   var _todaySchedule = [];
   var todayDate = DateFormat("yyyyMMdd").format(DateTime.now());
+  var _today = new DateFormat.yMMMd().format(DateTime.now());
   getTodaySchedule(todayDate) async {
     var res = await http
         .get(Uri.parse('http://localhost:3000/schedule?date=${todayDate}'));
@@ -72,64 +73,104 @@ class _scheduleState extends State<schedule> {
       child: Column(
         children: [
           topinfobar(weatherData: widget.weatherData),
-          Flexible(
-            child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: _todaySchedule.length,
-                controller: scroll,
-                itemBuilder: (c, i) {
-                  return Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                          color: Colors.black,
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey,
-                                offset: Offset(0.0, 1.0),
-                                blurRadius: 6.0)
-                          ]),
-                      padding: EdgeInsets.all(10),
-                      margin: EdgeInsets.fromLTRB(70, 10, 70, 10),
-                      alignment: Alignment.topLeft,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: double.infinity,
-                            // height: ,
-                            child: Text(
-                              'date: ${_todaySchedule[i]['date'].toString()}',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
-                            ),
-                          ),
-                          Row(
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.fromLTRB(40, 20, 20, 0),
+                  width: 500,
+                  height: 600,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                      color: Colors.black,
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(0.0, 1.0),
+                            blurRadius: 6.0)
+                      ]),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          '수요일',
+                          style: TextStyle(color: Colors.white, fontSize: 40),
+                        ),
+                        Text(
+                          _today,
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                      ]),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: _todaySchedule.length,
+                      controller: scroll,
+                      itemBuilder: (c, i) {
+                        return Container(
+                            height: 100,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(4.0)),
+                                color: Colors.black,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.grey,
+                                      offset: Offset(0.0, 1.0),
+                                      blurRadius: 6.0)
+                                ]),
+                            padding: EdgeInsets.all(10),
+                            margin: EdgeInsets.fromLTRB(70, 10, 70, 10),
+                            alignment: Alignment.topLeft,
+                            child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 SizedBox(
-                                  width: 100,
+                                  width: double.infinity,
                                   // height: ,
                                   child: Text(
-                                    'title: ${_todaySchedule[i]['title'].toString()}',
+                                    'date: ${_todaySchedule[i]['date'].toString()}',
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 18),
                                   ),
                                 ),
-                                SizedBox(
-                                  child: Text(
-                                    'text: ${_todaySchedule[i]['text'].toString()}',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 18),
-                                  ),
-                                ),
-                              ]),
-                        ],
-                      ));
-                }),
-          )
+                                Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        width: 100,
+                                        // height: ,
+                                        child: Text(
+                                          'title: ${_todaySchedule[i]['title'].toString()}',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        child: Text(
+                                          'text: ${_todaySchedule[i]['text'].toString()}',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18),
+                                        ),
+                                      ),
+                                    ]),
+                              ],
+                            ));
+                      }),
+                )
+              ],
+            ),
+          ),
         ],
       ),
     );
